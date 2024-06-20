@@ -18,9 +18,11 @@ public extension CaseAccessible {
     
     /// Check if an enum case matches another case
     func matches(case: Self) -> Bool {
-        var root = self
-        var `case` = `case`
-        return memcmp(&root, &`case`, MemoryLayout<Self>.size) == 0 || root.label == `case`.label
+		withUnsafePointer(to: self) { root in
+			withUnsafePointer(to: `case`) { `case` in
+				memcmp(root, `case`, MemoryLayout<Self>.size) == 0 || root.pointee.label == `case`.pointee.label
+			}
+		}
     }
     
     /// Check if an enum case matches a specific pattern

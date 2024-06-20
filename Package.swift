@@ -1,10 +1,10 @@
-// swift-tools-version:5.1
+// swift-tools-version:6.0
 import PackageDescription
 
 let package = Package(
     name: "EnumKit",
     platforms: [
-      .macOS(.v10_10), .iOS(.v10), .tvOS(.v10), .watchOS(.v4)
+      .macOS(.v10_13), .iOS(.v12), .tvOS(.v12), .watchOS(.v4)
     ],
     products: [
         .library(
@@ -15,7 +15,8 @@ let package = Package(
     targets: [
         .target(
             name: "EnumKit",
-            dependencies: []),
+            dependencies: [],
+			swiftSettings: [.swiftLanguageVersion(.v6)]),
         .testTarget(
             name: "EnumKitTests",
             dependencies: ["EnumKit"]),
